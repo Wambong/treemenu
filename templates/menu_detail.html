@@ -1,0 +1,29 @@
+<!-- menu_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ menu.name }}</title>
+</head>
+<body>
+    <h1>{{ menu.name }}</h1>
+     <div class="row" style="padding-top: 20px;">
+      {% for product in products %}
+            <div class="card" style="width: 18rem; padding-top: 5px; margin-top: 5px;">
+                    {% if product.images %}
+                         <img src="{{ product.images.url }}" class="card-img-top" alt="{{ product.name }}" style="max-width: 100%; height: auto;">
+                      {% endif %}
+              <div class="card-body">
+                <h5 class="card-title"><a href="{{ product.get_url }}">{{ product.name }}</a></h5>
+              </div>
+        </div>
+      {% endfor %}
+     </div>
+    <ul>
+        {% for product in products %}
+            <li><a href="{{ product.get_url }}">{{ product.name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
