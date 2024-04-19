@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>{{ menu.name }}</h1>
+    <p>{{ menu.get_menu_path|safe }}</p>
      <div class="row" style="padding-top: 20px;">
       {% for product in products %}
             <div class="card" style="width: 18rem; padding-top: 5px; margin-top: 5px;">
@@ -20,10 +21,6 @@
         </div>
       {% endfor %}
      </div>
-    <ul>
-        {% for product in products %}
-            <li><a href="{{ product.get_url }}">{{ product.name }}</a></li>
-        {% endfor %}
-    </ul>
+
 </body>
 </html>

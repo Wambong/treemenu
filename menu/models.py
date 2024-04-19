@@ -19,6 +19,14 @@ class Menu(models.Model):
         if self.parent == self:
             raise ValidationError("A menu cannot be a child of itself.")
         super().clean()
+    def get_menu_path(self):
+        menu_path = ['<a href="{}">{}</a>'.format(self.get_absolute_url(), self.name)]
+        current_menu = self.parent
+        while current_menu:
+            menu_path.insert(0, '<a href="{}">{}</a>'.format(current_menu.get_absolute_url(), current_menu.name))
+            current_menu = current_menu.parent
+        return ' / '.join(menu_path)
+
 class Product(models.Model):
     name = models.CharField(max_length=100)
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE, null=True, blank=True, related_name='products')
